@@ -28,11 +28,6 @@ services:
         generateValue: true
       - key: BASE_PATH
         value: "/"
-      - key: VITE_SITE_URL
-      - key: EMAIL_FROM
-      - key: EMAIL_API_KEY
-      - key: VITE_PHONE_NUMBER
-      - key: VITE_WHATSAPP_NUMBER
 
 databases:
   - name: mes-db
