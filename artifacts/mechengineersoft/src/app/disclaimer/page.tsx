@@ -1,0 +1,3 @@
+import type { Metadata } from '@/lib/metadata'; import LegalPage from '../legal/LegalPage';
+export const metadata: Metadata = { title: 'Disclaimer | Mech Engineer Soft', alternates: { canonical: '/disclaimer' } };
+export default function DisclaimerPage() { return <LegalPage title="Disclaimer" updated="11 August 2026" sections={[{ heading: 'General information', copy: 'The material on this website is for general information and does not constitute professional, legal, financial, or technical advice for a specific situation.' }, { heading: 'Demo work', copy: 'Portfolio items may represent demonstration concepts and capabilities. Actual project scope, results, and integrations depend on the requirements agreed for each engagement.' }]} />; }

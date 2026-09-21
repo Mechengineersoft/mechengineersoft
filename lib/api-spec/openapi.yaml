@@ -1,0 +1,128 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /contact:
+    post:
+      operationId: submitContact
+      tags: [contact]
+      summary: Submit a consultation request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactInquiryInput"
+      responses:
+        "201":
+          description: Consultation request received
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubmissionStatus"
+        "400":
+          description: Invalid request
+        "503":
+          description: Enquiry service unavailable
+  /newsletter:
+    post:
+      operationId: subscribeNewsletter
+      tags: [newsletter]
+      summary: Subscribe an email address to the newsletter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewsletterSubscriptionInput"
+      responses:
+        "201":
+          description: Subscription created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubmissionStatus"
+        "400":
+          description: Invalid request
+        "503":
+          description: Newsletter service unavailable
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    ContactInquiryInput:
+      type: object
+      required: [name, email, phone, company, meetingType, projectSummary]
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 160
+        email:
+          type: string
+          maxLength: 255
+        phone:
+          type: string
+          minLength: 6
+          maxLength: 48
+        company:
+          type: string
+          minLength: 2
+          maxLength: 180
+        date:
+          type: string
+          maxLength: 24
+        time:
+          type: string
+          maxLength: 32
+        meetingType:
+          type: string
+          minLength: 2
+          maxLength: 100
+        projectSummary:
+          type: string
+          minLength: 30
+          maxLength: 6000
+    NewsletterSubscriptionInput:
+      type: object
+      required: [email]
+      properties:
+        email:
+          type: string
+          maxLength: 255
+    SubmissionStatus:
+      type: object
+      required: [ok, message]
+      properties:
+        ok:
+          type: boolean
+        message:
+          type: string
+

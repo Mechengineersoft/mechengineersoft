@@ -1,0 +1,4 @@
+- [Next-to-Vite migrations](vite-import-migration.md) — browser code must use import.meta.env, and imported Tailwind v3 CSS needs a deliberate Tailwind v4 entry-point adaptation.
+- [Preview auth sessions](preview-auth-sessions.md) — proxied previews may not preserve cookie sessions across SPA navigation; retain a signed handoff and redact every transport header.
+- [Database content fallbacks](database-content-fallbacks.md) — seed complete legacy content and keep a safe fallback when making public collections editable.
+- [Resend connection authentication](resend-auth.md) — an attached API-key connection can still return 401; verify delivery and keep credentials out of logs.

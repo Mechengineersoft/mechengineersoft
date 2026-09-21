@@ -1,0 +1,3 @@
+import type { Metadata } from 'next'; import LegalPage from '../legal/LegalPage';
+export const metadata: Metadata = { title: 'Cookie Policy | Mech Engineer Soft', alternates: { canonical: '/cookie-policy' } };
+export default function CookiePage() { return <LegalPage title="Cookie Policy" updated="11 August 2026" sections={[{ heading: 'How cookies are used', copy: 'Cookies may be used to support essential website behavior, understand aggregate usage, and improve the site experience. Optional analytics should only be activated with the appropriate consent configuration.' }, { heading: 'Managing cookies', copy: 'You can manage or remove cookies through your browser settings. Restricting essential cookies may affect parts of the website.' }]} />; }

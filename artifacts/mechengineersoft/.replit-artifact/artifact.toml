@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "MechEngineersoft"
+description = "A polished software engineering studio website showcasing services, industries, portfolio work, pricing, insights, and contact flows for prospective clients."
+version = "1.0.0"
+id = "artifacts/mechengineersoft"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19697
+
+[services.development]
+run = "pnpm --filter @workspace/mechengineersoft run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/mechengineersoft", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/mechengineersoft/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19697"
+BASE_PATH = "/"
