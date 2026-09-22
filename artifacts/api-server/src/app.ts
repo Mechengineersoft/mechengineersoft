@@ -57,7 +57,7 @@ if (fs.existsSync(frontendDistDir)) {
     }),
   );
 
-  app.get("(.*)", (_req, res) => {
+  app.get(/.*/, (_req, res) => {
     const indexPath = path.join(frontendDistDir, "index.html");
     if (fs.existsSync(indexPath)) {
       res.sendFile(indexPath);
