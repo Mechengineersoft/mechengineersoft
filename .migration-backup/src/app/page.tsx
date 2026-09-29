@@ -14,12 +14,12 @@ import CompanyShowcase from '@/app/components/CompanyShowcase';
 import TestimonialsSection from '@/app/components/TestimonialsSection';
 
 export const metadata: Metadata = {
-  title: 'MechEngineerSoft — Engineering Business Solutions Through Software',
+  title: 'Mech Engineer Soft — Engineering Business Solutions Through Software',
   description:
-    'MechEngineerSoft builds custom ERP, CRM, inventory, and automation software for Indian manufacturers, startups, and enterprises. Book a free consultation today.',
+    'Mech Engineer Soft builds custom ERP, CRM, inventory, and automation software for Indian manufacturers, startups, and enterprises. Book a free consultation today.',
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'MechEngineerSoft — Engineering Business Solutions',
+    title: 'Mech Engineer Soft — Engineering Business Solutions',
     description: 'Custom ERP, CRM, dashboards, and automation software for Indian businesses.',
     url: '/',
     type: 'website',
