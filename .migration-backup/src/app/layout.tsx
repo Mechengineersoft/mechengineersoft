@@ -13,8 +13,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
-  title: 'MechEngineerSoft — Engineering Business Solutions Through Software',
-  description: 'MechEngineerSoft builds custom ERP, CRM, dashboards, and automation software for manufacturers, startups, and enterprises across India.',
+  title: 'Mech Engineer Soft — Engineering Business Solutions Through Software',
+  description: 'Mech Engineer Soft builds custom ERP, CRM, dashboards, and automation software for manufacturers, startups, and enterprises across India.',
   keywords: [
     'Business Software Development',
     'Custom Software Development',
@@ -30,14 +30,14 @@ export const metadata: Metadata = {
     'Manufacturing Software',
   ],
   openGraph: {
-    title: 'MechEngineerSoft — Engineering Business Solutions',
+    title: 'Mech Engineer Soft — Engineering Business Solutions',
     description: 'Custom ERP, CRM, and automation software built for Indian enterprises.',
     type: 'website',
     images: [{ url: '/assets/images/app_logo.png', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MechEngineerSoft — Engineering Business Solutions',
+    title: 'Mech Engineer Soft — Engineering Business Solutions',
     description: 'Custom ERP, CRM, and automation software built for Indian enterprises.',
     images: ['/assets/images/app_logo.png'],
   },
