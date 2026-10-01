@@ -319,7 +319,7 @@ export default function FounderStorySection() {
                   <div
                     className="absolute inset-[3px] rounded-full overflow-hidden flex items-center justify-center text-4xl font-extrabold gradient-text"
                     style={{ background: 'var(--card)' }} aria-label={`${about.founderName} portrait`}>
-                        {about.founderImage ? <img src={/assets/images/founder-home.png} alt={`${about.founderName} portrait`} className="w-full h-full object-cover" /> : 'SW'}
+                        {about.founderImage ? <img src={about.founderImage} alt={`${about.founderName} portrait`} className="w-full h-full object-cover" /> : 'SW'}
                   </div>
                 </div>
               </div>
