@@ -42,7 +42,7 @@ export const defaultAboutContent: AboutPageContent = {
     "Experienced in developing solutions for production management, inventory systems, operational reporting and business process automation — his expertise spans business automation, custom software development, ERP systems, dashboards, and scalable web applications.",
   ],
   founderQuote: "I am passionate about solving real business problems using software. My engineering background allows me to understand industrial processes while my software expertise enables me to build scalable digital solutions.",
-  founderImage: "/assets/images/founder.png",
+  founderImage: "/assets/images/founder.jpg",
   founderChips: ["Engineering Mindset", "Business Automation", "Modern Software", "Cloud Technologies"],
   missionHeadline: "Empower through automation",
   missionBody: "To empower businesses with intelligent software solutions that automate operations, increase productivity and accelerate growth — removing complexity, not adding it.",
