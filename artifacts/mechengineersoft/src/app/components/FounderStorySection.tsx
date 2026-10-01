@@ -317,7 +317,7 @@ export default function FounderStorySection() {
                     }}
                   />
                   <div
-                    className="absolute inset-[3px] rounded-full flex items-center justify-center text-4xl font-extrabold gradient-text"
+                    className="absolute inset-[4px] rounded-full flex items-center justify-center text-4xl font-extrabold gradient-text"
                     style={{ background: 'var(--card)' }} aria-label={`${about.founderName} portrait`}>
                         {about.founderImage ? <img src={about.founderImage} alt={`${about.founderName} portrait`} className="w-full h-full object-cover" /> : 'SW'}
                   </div>
