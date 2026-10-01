@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { useAboutContent } from '../about/useAboutContent';
+
 /* ─── Timeline milestones ─────────────────────────────────────── */
 const timelineMilestones = [
   {
@@ -264,7 +264,7 @@ function SkillBadge({ label, color, delay }: { label: string; color: string; del
 
 /* ─── Main Component ─────────────────────────────────────────── */
 export default function FounderStorySection() {
-  const about = useAboutContent();
+  const homeFounderImage = "/assets/images/founder-home.png";
   const { ref: timelineRef, inView: timelineInView } = useInView(0.05);
   const { ref: mvRef, inView: mvInView } = useInView(0.15);
   const { ref: skillsRef, inView: skillsInView } = useInView(0.1);
@@ -318,8 +318,8 @@ export default function FounderStorySection() {
                   />
                   <div
                     className="absolute inset-[3px] rounded-full overflow-hidden flex items-center justify-center text-4xl font-extrabold gradient-text"
-                    style={{ background: 'var(--card)' }} aria-label={`${about.founderName} portrait`}>
-                        {about.founderImage ? <img src={about.founderImage} alt={`${about.founderName} portrait`} className="w-full h-full object-cover" /> : 'SW'}
+                    style={{ background: 'var(--card)' }} aria-label="Founder portrait">
+                        <img src={homeFounderImage} alt="Founder portrait" className="w-full h-full object-cover" />
                   </div>
                 </div>
               </div>
