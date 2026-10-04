@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type ReactNode, useEffect, useLayoutEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
@@ -57,6 +57,38 @@ function Router() {
   );
 }
 
+function RouteScrollReset() {
+  const [location] = useLocation();
+
+  useLayoutEffect(() => {
+    const resetToTop = () => {
+      document.body.style.overflow = '';
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    };
+    resetToTop();
+    let secondFrame = 0;
+    const firstFrame = window.requestAnimationFrame(() => {
+      resetToTop();
+      secondFrame = window.requestAnimationFrame(resetToTop);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(firstFrame);
+      if (secondFrame) window.cancelAnimationFrame(secondFrame);
+    };
+  }, [location]);
+
+  useEffect(() => {
+    const previousRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = 'manual';
+    return () => {
+      window.history.scrollRestoration = previousRestoration;
+    };
+  }, []);
+
+  return null;
+}
+
 function RoutedErrorBoundary({ children }: { children: ReactNode }) {
   const [location] = useLocation();
   return <ErrorBoundary resetKey={location}>{children}</ErrorBoundary>;
@@ -66,7 +98,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}><RootLayout><Router /></RootLayout></WouterRouter>
+        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
+          <RouteScrollReset />
+          <RootLayout><Router /></RootLayout>
+        </WouterRouter>
         <Toaster />
       </TooltipProvider>
     </QueryClientProvider>
