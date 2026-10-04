@@ -315,12 +315,44 @@
     z-index: 100;
     transform: translateY(100px);
     opacity: 0;
+    pointer-events: none;
     transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.5s ease;
   }
 
   .sticky-cta.visible {
     transform: translateY(0);
     opacity: 1;
+    pointer-events: auto;
+  }
+
+  @media (max-width: 640px) {
+    .sticky-cta {
+      right: max(0.75rem, env(safe-area-inset-right));
+      bottom: calc(5.5rem + env(safe-area-inset-bottom));
+      z-index: 45;
+      transform: translateY(0);
+      transition: opacity 0.2s ease;
+    }
+
+    .sticky-cta.visible {
+      transform: translateY(0);
+    }
+
+    .floating-contact {
+      left: max(0.75rem, env(safe-area-inset-left));
+      bottom: max(0.75rem, env(safe-area-inset-bottom));
+      z-index: 50;
+    }
+
+    .floating-contact__actions {
+      gap: 0.5rem;
+    }
+
+    .floating-contact__button {
+      width: 2.75rem;
+      height: 2.75rem;
+      flex: 0 0 2.75rem;
+    }
   }
 
   /* Preloader */
