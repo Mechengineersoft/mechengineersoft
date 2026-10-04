@@ -43,9 +43,12 @@ export default function FloatingContact() {
   }
 
   return (
-    <div className="fixed bottom-6 left-6 z-50 flex flex-col items-start gap-3 print:hidden">
+    <div
+      className="floating-contact fixed bottom-6 left-6 z-50 flex flex-col items-start gap-3 print:hidden"
+      data-chat-open={chatOpen}
+    >
       {chatOpen && (
-        <div className="glass-card rounded-2xl p-5 w-[21rem] max-w-[calc(100vw-3rem)] shadow-2xl" role="dialog" aria-label="Mech Engineer Soft assistant">
+        <div className="floating-contact__panel glass-card w-[21rem] max-w-[calc(100vw-2rem)] rounded-2xl p-5 shadow-2xl" role="dialog" aria-label="Mech Engineer Soft assistant">
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="font-bold text-sm">Mech Engineer Soft Assistant</p>
@@ -75,17 +78,17 @@ export default function FloatingContact() {
         </div>
       )}
 
-      <div className="flex items-center gap-3">
-        <button onClick={() => setChatOpen((open) => !open)} aria-expanded={chatOpen} aria-label={chatOpen ? 'Close assistant' : 'Open assistant'} className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shadow-xl shadow-primary/30 hover:scale-105 transition-transform">
+      <div className="floating-contact__actions flex items-center gap-3">
+        <button onClick={() => setChatOpen((open) => !open)} aria-expanded={chatOpen} aria-label={chatOpen ? 'Close assistant' : 'Open assistant'} className="floating-contact__button w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shadow-xl shadow-primary/30 hover:scale-105 transition-transform">
           <Icon name="ChatBubbleLeftRightIcon" size={20} />
         </button>
-        <a href={cleanPhone ? `tel:+${cleanPhone}` : '/contact'} aria-label="Call Mech Engineer Soft" className="w-12 h-12 rounded-full border border-sky-500/40 bg-sky-500/15 text-sky-300 flex items-center justify-center shadow-xl hover:scale-105 transition-transform">
+        <a href={cleanPhone ? `tel:+${cleanPhone}` : '/contact'} aria-label="Call Mech Engineer Soft" className="floating-contact__button w-12 h-12 rounded-full border border-sky-500/40 bg-sky-500/15 text-sky-300 flex items-center justify-center shadow-xl hover:scale-105 transition-transform">
           <Icon name="PhoneIcon" size={20} />
         </a>
-        <a href={cleanWhatsapp ? `https://wa.me/${cleanWhatsapp}` : '/contact'} target={cleanWhatsapp ? '_blank' : undefined} rel="noopener noreferrer" aria-label="Message Mech Engineer Soft on WhatsApp" className="w-12 h-12 rounded-full border border-emerald-500/40 bg-emerald-500/15 text-emerald-300 flex items-center justify-center shadow-xl hover:scale-105 transition-transform">
+        <a href={cleanWhatsapp ? `https://wa.me/${cleanWhatsapp}` : '/contact'} target={cleanWhatsapp ? '_blank' : undefined} rel="noopener noreferrer" aria-label="Message Mech Engineer Soft on WhatsApp" className="floating-contact__button w-12 h-12 rounded-full border border-emerald-500/40 bg-emerald-500/15 text-emerald-300 flex items-center justify-center shadow-xl hover:scale-105 transition-transform">
           <Icon name="ChatBubbleOvalLeftEllipsisIcon" size={20} />
         </a>
-        <Link href="/contact" aria-label="Open contact page" className="w-12 h-12 rounded-full border border-violet-500/40 bg-violet-500/15 text-violet-300 flex items-center justify-center shadow-xl hover:scale-105 transition-transform">
+        <Link href="/contact" aria-label="Open contact page" className="floating-contact__button w-12 h-12 rounded-full border border-violet-500/40 bg-violet-500/15 text-violet-300 flex items-center justify-center shadow-xl hover:scale-105 transition-transform">
           <Icon name="AddressBookIcon" size={20} />
         </Link>
       </div>
