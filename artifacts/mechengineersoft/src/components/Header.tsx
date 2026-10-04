@@ -27,6 +27,10 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const headerRef = useRef<HTMLElement>(null);
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
+
+  const isCurrentPage = (href: string) =>
+    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,8 +57,22 @@ export default function Header() {
 
   // Close menu on route change
   useEffect(() => {
+    if (mobileOpen) {
+      mobileMenuButtonRef.current?.focus({ preventScroll: true });
+    }
     setMobileOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      setMobileOpen(false);
+      mobileMenuButtonRef.current?.focus({ preventScroll: true });
+    };
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
+  }, [mobileOpen]);
 
   return (
     <>
@@ -70,7 +88,7 @@ export default function Header() {
       />
       <header
         ref={headerRef}
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 w-full z-[70] transition-all duration-500 ${
           scrolled
             ? 'py-3 bg-background/90 backdrop-blur-xl border-b border-border' :'py-5 bg-transparent'
         }`}
@@ -123,7 +141,12 @@ export default function Header() {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:border-primary transition-all"
+            ref={mobileMenuButtonRef}
+            className={`md:hidden flex items-center justify-center w-11 h-11 rounded-xl border transition-all ${
+              mobileOpen
+                ? 'border-primary bg-primary/15 text-accent'
+                : 'border-border text-muted-foreground hover:text-foreground hover:border-primary'
+            }`}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={mobileOpen}
@@ -136,7 +159,7 @@ export default function Header() {
       {/* Mobile Menu Overlay */}
       <div
         id="mobile-menu"
-        className={`fixed inset-0 z-40 md:hidden transition-all duration-500 ${
+        className={`fixed inset-0 z-[60] md:hidden transition-all duration-300 ${
           mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         aria-hidden={!mobileOpen}
@@ -144,16 +167,21 @@ export default function Header() {
         <div
           className="absolute inset-0 bg-background/95 backdrop-blur-xl"
           onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
         />
-        <div className="relative z-10 flex flex-col items-center justify-center h-full gap-8 px-6">
-          <MESLogo size={56} animated />
-          <nav className="flex flex-col items-center gap-6" aria-label="Mobile navigation">
+        <div className="relative z-10 flex min-h-full max-h-[100dvh] flex-col items-center gap-4 overflow-y-auto overscroll-contain px-6 pt-[calc(6.5rem+env(safe-area-inset-top))] pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
+          <MESLogo size={44} animated />
+          <nav className="flex w-full max-w-sm flex-col gap-1.5" aria-label="Mobile navigation">
             {navLinks?.map((link, i) => (
               <Link
                 key={link?.href}
                 href={link?.href}
-                className={`text-2xl font-bold tracking-tight transition-colors duration-200 ${
-                  pathname === link?.href ? 'text-accent' : 'text-foreground hover:text-accent'
+                tabIndex={mobileOpen ? 0 : -1}
+                aria-current={isCurrentPage(link.href) ? 'page' : undefined}
+                className={`flex min-h-12 items-center justify-center rounded-xl border px-5 py-2 text-lg font-bold tracking-tight transition-colors duration-200 ${
+                  isCurrentPage(link.href)
+                    ? 'border-primary/40 bg-primary/15 text-accent shadow-[0_0_20px_rgba(10,123,255,0.12)]'
+                    : 'border-transparent text-foreground hover:border-border hover:bg-secondary/60 hover:text-accent'
                 }`}
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
@@ -163,12 +191,13 @@ export default function Header() {
           </nav>
           <Link
             href="/contact"
-            className="btn-primary text-base px-8 py-3 mt-4"
+            tabIndex={mobileOpen ? 0 : -1}
+            className="btn-primary mt-2 min-h-12 px-8 py-3 text-base"
             aria-label="Book a free consultation"
           >
             Book Consultation
           </Link>
-          <Link href="/admin/login" className="text-sm text-muted-foreground hover:text-foreground">Admin login</Link>
+          <Link tabIndex={mobileOpen ? 0 : -1} href="/admin/login" className="min-h-11 px-4 py-3 text-sm text-muted-foreground hover:text-foreground">Admin login</Link>
         </div>
       </div>
     </>
